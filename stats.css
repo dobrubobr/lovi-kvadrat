@@ -1,0 +1,157 @@
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 12px;
+    text-align: center;
+    color: white;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    margin-top: 4px;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.achievement-card {
+    background: #f1f5f9;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.achievement-card.locked {
+    opacity: 0.5;
+    filter: grayscale(0.3);
+}
+
+.achievement-card.unlocked {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 1px solid #f59e0b;
+}
+
+.achievement-icon {
+    font-size: 1.8rem;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-name {
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.achievement-desc {
+    font-size: 0.65rem;
+    color: #666;
+}
+
+.achievement-progress {
+    font-size: 0.65rem;
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.leaderboard-table {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.leaderboard-level {
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.leaderboard-header {
+    background: #1e293b;
+    color: white;
+    padding: 8px 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.leaderboard-rows {
+    padding: 6px;
+}
+
+.leaderboard-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.8rem;
+}
+
+.leaderboard-row:last-child {
+    border-bottom: none;
+}
+
+.rank-1 { background: #fef3c7; font-weight: bold; }
+.rank-2 { background: #f1f5f9; }
+.rank-3 { background: #fef2f2; }
+
+.reset-stats-btn {
+    width: 100%;
+    padding: 10px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reset-stats-btn:hover {
+    background: #dc2626;
+    transform: scale(0.98);
+}
+
+.achievement-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Лови квадрат</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stats.css">
+</head>
+<body id="mainBody">
+    <div class="app-container">
+        <!-- Главное меню -->
+        <div class="menu-card" id="menuCard">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="levels">Уровни сложности</button>
+                <button class="tab-btn" data-tab="rules">Правила игры</button>
+                <button class="tab-btn" data-tab="modes">🎮 Режимы</button>
+                <button class="tab-btn" data-tab="stats">🏆 Статистика</button>
+            </div>
+
+            <!-- Вкладка: Уровни -->
+            <div class="tab-content active" id="tabLevels">
+                <h2>Выберите уровень</h2>
+                <div class="levels-grid">
+                    <button class="level-btn" data-level="0" style="background: #b8e4c9; color: #1e3a2f;">🌱 Новичок<br><span class="level-stats">3.5с | 45с</span></button>
+                    <button class="level-btn" data-level="1" style="background: #fff2b5; color: #5c4800;">🍃 Лёгкий<br><span class="level-stats">2.0с | 35с</span></button>
+                    <button class="level-btn" data-level="2" style="background: #ffd8a9; color: #7a3e00;">⚡ Средний<br><span class="level-stats">1.5с | 30с</span></button>
+                    <button class="level-btn" data-level="3" style="background: #ffb4a2; color: #8b1e00;">🔥 Тяжёлый<br><span class="level-stats">0.7с | 20с</span></button>
+                    <button class="level-btn" data-level="4" style="background: #ff8a7a; color: #5e0000;">💀 Эксперт<br><span class="level-stats">0.2с | 12с</span></button>
+                </div>
+
+                <div class="color-picker-area">
+                    <label for="squareColor">🎨 Цвет квадрата:</label>
+                    <input type="color" id="squareColor" value="#e63946">
+                    <div class="selected-color-demo" id="colorDemo" style="background-color: #e63946;"></div>
+                </div>
+
+                <div class="current-record">
+                    🏆 Рекорд уровня: <span id="recordDisplay">0</span>
+                </div>
+
+                <button class="start-game-btn" id="startGameBtn">🎮 Начать игру</button>
+            </div>
+
+            <!-- Вкладка: Правила -->
+            <div class="tab-content" id="tabRules">
+                <h2>Как играть?</h2>
+                <ul class="rules-list">
+                    <li>🔴 Кликайте на <strong>цветной квадрат</strong> — получаете +1 очко</li>
+                    <li>⏱️ Квадрат сам прыгает каждые <strong>X секунд</strong> (зависит от сложности)</li>
+                    <li>🎯 Промахи по полю не наказываются</li>
+                    <li>🏆 За отведённое время наберите максимум очков</li>
+                    <li>📌 Рекорд сохраняется для каждого уровня отдельно</li>
+                    <li>🔥 3 клика подряд → x2 очков на 3 секунды!</li>
+                </ul>
+            </div>
+
+            <!-- Вкладка: Режимы -->
+            <div class="tab-content" id="tabModes">
+                <h2>🎲 Специальные режимы</h2>
+                <div class="modes-grid">
+                    <button class="mode-btn" data-mode="endless" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        ♾️ Бесконечный режим<br>
+                        <span class="mode-desc">Играй пока не промахнешься 3 раза</span>
+                    </button>
+                    <button class="mode-btn" data-mode="boss" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        👾 Режим босса<br>
+                        <span class="mode-desc">Квадрат уменьшается с каждым кликом</span>
+                    </button>
+                    <button class="mode-btn" data-mode="multiplayer" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        👥 Мультиплеер<br>
+                        <span class="mode-desc">30 секунд на двоих</span>
+                    </button>
+                </div>
+                <div class="mode-info" id="modeInfo"></div>
+            </div>
+
+            <!-- Вкладка: Статистика -->
+            <div class="tab-content" id="tabStats">
+                <h2>🏆 Статистика и достижения</h2>
+                
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalScore">0</div>
+                        <div class="stat-label">Всего очков</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalGames">0</div>
+                        <div class="stat-label">Сыграно игр</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalClicks">0</div>
+                        <div class="stat-label">Всего кликов</div>
+                    </div>
+                </div>
+
+                <h3>✨ Достижения</h3>
+                <div class="achievements-grid" id="achievementsGrid"></div>
+
+                <h3>📊 Таблица рекордов (Топ-3)</h3>
+                <div class="leaderboard-table" id="leaderboardTable"></div>
+
+                <button class="reset-stats-btn" id="resetStatsBtn">🔄 Сбросить статистику</button>
+            </div>
+        </div>
+
+        <!-- Игровое поле -->
+        <div class="game-area" id="gameArea" style="display: none;">
+            <div class="game-header">
+                <div class="score-box">🎯 Очки: <span id="scoreValue">0</span></div>
+                <div class="combo-box" id="comboBox" style="display: none;">🔥 x2 КОМБО!</div>
+                <div class="timer-box">⏱️ Время: <span id="timerValue">0</span>с</div>
+            </div>
+            <div class="field-container">
+                <div class="game-field" id="gameField">
+                    <div class="square" id="square"></div>
+                </div>
+            </div>
+            <div class="mode-status" id="modeStatus"></div>
+        </div>
+
+        <!-- Финальное окно -->
+        <div class="modal-overlay" id="modalOverlay" style="display: none;">
+            <div class="modal-card">
+                <h2>🏁 Игра окончена</h2>
+                <div class="final-score">Ваш результат: <span id="finalScore">0</span> очков</div>
+                <div class="record-message" id="recordMessage"></div>
+                <div class="modal-buttons">
+                    <button class="btn-replay" id="replayBtn">🔄 Играть снова</button>
+                    <button class="btn-menu" id="menuBtn">🏠 Главное меню</button>
+                </div>
+                <div class="other-levels-title">⚡ Другие уровни:</div>
+                <div class="other-levels" id="otherLevelsButtons"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="stats.js"></script>
+    <script src="game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
