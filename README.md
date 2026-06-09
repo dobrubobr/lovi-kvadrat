@@ -88,4 +88,6 @@
 └── main.js # Инициализация и обработчики
 
 
-https://dobrubobr.github.io/lovi-kvadrat/ - ссылка на игру
+## 🌐 Демо
+
+**[Играть в Лови квадрат](https://dobrubobr.github.io/lovi-kvadrat/)**
